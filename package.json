@@ -1,0 +1,15 @@
+{
+  "name": "juliobot_discord",
+  "version": "1.2.0",
+  "description": "<br />",
+  "main": "JulioBot.js",
+  "scripts": {
+    "start": "node JulioBot.js"
+  },
+  "keywords": [],
+  "author": "Julio Reyes | www.jjrh92.dev",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.13.0"
+  }
+}
