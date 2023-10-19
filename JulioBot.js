@@ -1,53 +1,28 @@
-const { REST } = require ('@discordjs/rest')
-const { Client, GatewayIntentBits, Partials } = require ('discord.js');
-const { Routes } = require ('discord-api-types/v9')
-const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
+const Eris = require ("eris");
+require ("dotenv").config ();
 
-const fs = require('fs')
-const path = require('path')
+const bot = new Eris (process.env.DISCORD_TOKEN);
 
-let commandTmp = []
-let commands = []
+bot.on("ready", () => {
 
-require('dotenv').config({
-    path: path.join(__dirname, '.env'),
-})
+  console.log(`🎒🤖 BultoBot V-1.2.0\n......................\nRunning smoothly like Julio intended =)\nhttps://github.com/jjrh92/JulioBot_Discord`);
 
-const token = process.env.DISCORD_TOKEN
+});
 
-client.once('ready', () => {
-    console.log('BultoBot Listo!')
+bot.on ("error", (err) => {
 
-    let commandsFiles = fs.readdirSync(path.join(__dirname, './commands'))
+    console.error(err); 
 
-    commandsFiles.forEach((file, i) => {
-        commandTmp[i] = require('./commands/' + file)
-        commands = [
-            ...commands,
-            {
-                name: file.split('.')[0],
-                description: commandTmp[i].description,
-                init: commandTmp[i].init,
-                options: commandTmp[i].options,
-            },
-        ]
-    })
+});
 
-    const rest = new REST({ version: '9' }).setToken(token)
-    rest.put(Routes.applicationCommands(client.application.id), {
-        body: commands,
-    })
-        .then(() => {
-            console.log('Comandos Cargados!')
-        })
-        .catch(console.error)
-})
+bot.on ("messageCreate", (msg) => {
 
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return
-    const { commandName } = interaction
-    const selectedCommand = commands.find(c => commandName === c.name)
-    selectedCommand.init(interaction, client)
-})
+  if(msg.content === "/julio") {
 
-client.login (token)
+    bot.createMessage (msg.channel.id, "reyes!");
+
+  }
+
+});
+
+bot.connect();
