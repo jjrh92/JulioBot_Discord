@@ -1,29 +1,31 @@
 {
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "eris": "^0.17.2"
-  },
-  "name": "juliobot_discord",
-  "description": "Bot para discord con contenido personalizable.",
-  "version": "1.2.0",
-  "main": "JulioBot.js",
-  "scripts": {
-    "start": "node JulioBot.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jjrh92/JulioBot_Discord.git"
-  },
-  "keywords": [
-    "Discord",
-    "bot",
-    "DiscordBot",
-    "BultoBot"
-  ],
-  "author": "Julio Reyes | jjrh92.dev",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jjrh92/JulioBot_Discord/issues"
-  },
-  "homepage": "https://github.com/jjrh92/JulioBot_Discord#readme"
+    "name": "juliobot",
+    "version": "1.2.0",
+    "main": "JulioBot.js",
+    "bin": "JulioBot.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=production NODE_NO_WARNINGS=1 node . ",
+        "dev": "cross-env NODE_ENV=development NODE_NO_WARNINGS=1 node .",
+        "dev:watch": "cross-env NODE_ENV=development NODE_NO_WARNINGS=1 nodemon .",
+        "build": "pkg ."
+    },
+    "author": "Julio Reyes",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "discord.js": "^14.7.1",
+        "dotenv": "^16.0.2"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.19",
+        "pkg": "^5.7.0"
+    },
+    "pkg": {
+        "outputPath": "dist",
+        "scripts": "commands/**/*.js",
+        "assets": [
+            ".env"
+        ]
+    }
 }
